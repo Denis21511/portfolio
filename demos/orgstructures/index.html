@@ -1,0 +1,424 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Оргструктуры десяти предприятий</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&family=PT+Sans+Narrow:wght@400;700&display=swap">
+<style>
+:root{
+  --bg:#EEF0F2; --sheet:#FFFFFF; --sheet-edge:#D5DAE0;
+  --ink:#2F3740; --muted:#6A737D; --title:#4B5057;
+  --line:#56626F; --box:#E4E9EE; --box-stroke:#6E8093;
+  --side:#EBECDF; --side-stroke:#8F917A;
+  --unit:#F5F7F9; --unit-stroke:#8D9BA9;
+  --unit2:#EFEFEA; --owner-stroke:#34485E;
+  --accent:#2E5C8A; --tag:#7A6A4E;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#131619; --sheet:#1B1F23; --sheet-edge:#2E353C;
+    --ink:#DDE2E7; --muted:#98A1AA; --title:#C9CED3;
+    --line:#8C98A5; --box:#26303A; --box-stroke:#7F93A8;
+    --side:#2B2D24; --side-stroke:#9EA08A;
+    --unit:#20252B; --unit-stroke:#6F7D8B;
+    --unit2:#26261F; --owner-stroke:#A9BCD0;
+    --accent:#8DB5DE; --tag:#C8B48C;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#131619; --sheet:#1B1F23; --sheet-edge:#2E353C;
+  --ink:#DDE2E7; --muted:#98A1AA; --title:#C9CED3;
+  --line:#8C98A5; --box:#26303A; --box-stroke:#7F93A8;
+  --side:#2B2D24; --side-stroke:#9EA08A;
+  --unit:#20252B; --unit-stroke:#6F7D8B;
+  --unit2:#26261F; --owner-stroke:#A9BCD0;
+  --accent:#8DB5DE; --tag:#C8B48C;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:"PT Sans",Arial,sans-serif;font-size:16px;line-height:1.45;padding-inline:16px;padding-block:0 48px}
+nav.toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--sheet-edge);margin-inline:-16px;padding:10px 16px;display:flex;gap:6px;align-items:center;overflow-x:auto;white-space:nowrap}
+nav.toc span{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-right:6px}
+nav.toc a{font-family:"PT Sans Narrow",Arial,sans-serif;font-size:15px;color:var(--ink);text-decoration:none;border:1px solid var(--box-stroke);background:var(--sheet);padding:3px 10px}
+nav.toc a:hover,nav.toc a:focus-visible{background:var(--box);outline:2px solid var(--accent);outline-offset:1px}
+main{max-width:1240px;margin:24px auto 0;display:flex;flex-direction:column;gap:28px}
+.slide{background:var(--sheet);border:1px solid var(--sheet-edge);padding:28px clamp(16px,3vw,40px) 22px;scroll-margin-top:60px}
+.eyebrow{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+h1,h2{font-weight:700;color:var(--title);text-wrap:balance;margin:6px 0 0;line-height:1.1}
+h1{font-size:clamp(30px,4.4vw,52px)}
+h2{font-size:clamp(24px,3.2vw,40px);text-transform:uppercase;letter-spacing:.01em}
+.org{font-size:clamp(19px,2.2vw,26px);color:var(--ink);margin:12px 0 2px;text-wrap:balance;font-weight:700}
+.opf{font-size:16px;color:var(--muted);margin:0}
+.rule{border:0;border-top:1px solid var(--box-stroke);margin:12px 0}
+.facts{display:flex;flex-wrap:wrap;gap:4px 22px;font-size:13.5px;color:var(--muted);margin:0 0 6px;padding:0;list-style:none}
+.facts b{color:var(--ink);font-weight:400}
+.diagram{overflow-x:auto;margin-top:8px}
+.diagram svg{display:block;width:100%;min-width:860px;height:auto}
+svg text{font-family:"PT Sans Narrow","Arial Narrow",Arial,sans-serif;fill:var(--ink)}
+svg .cap{font-family:"PT Sans",Arial,sans-serif;font-size:12px;letter-spacing:.07em;fill:var(--muted)}
+svg .hdr{font-family:"PT Sans",Arial,sans-serif;font-size:13px;letter-spacing:.08em;font-weight:700;fill:var(--muted)}
+svg .t{font-weight:700}
+svg .s{fill:var(--muted)}
+svg .tag{font-style:italic;fill:var(--tag);font-family:"PT Sans",Arial,sans-serif}
+svg .conn{stroke:var(--line);stroke-width:1.4;fill:none}
+svg .arrowhead{fill:var(--line)}
+svg .b-main{fill:var(--box);stroke:var(--box-stroke);stroke-width:1.5}
+svg .b-owner{fill:var(--sheet);stroke:var(--owner-stroke);stroke-width:2.4}
+svg .b-side{fill:var(--side);stroke:var(--side-stroke);stroke-width:1.5}
+svg .b-unit{fill:var(--unit);stroke:var(--unit-stroke);stroke-width:1.3}
+svg .b-unit2{fill:var(--unit2);stroke:var(--side-stroke);stroke-width:1.3;stroke-dasharray:5 3}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;align-items:flex-end;border-top:1px solid var(--sheet-edge);margin-top:14px;padding-top:10px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--muted)}
+.legend i{display:inline-block;width:22px;height:13px;vertical-align:-2px;margin-right:6px;border:1.5px solid}
+.l-main{background:var(--box);border-color:var(--box-stroke)!important}
+.l-owner{background:var(--sheet);border-color:var(--owner-stroke)!important;border-width:2.4px!important}
+.l-side{background:var(--side);border-color:var(--side-stroke)!important}
+.l-unit{background:var(--unit);border-color:var(--unit-stroke)!important}
+.source{font-size:12.5px;color:var(--muted);max-width:62ch;margin:0}
+.source em{color:var(--tag)}
+/* титульный слайд */
+.lede{font-size:18px;color:var(--muted);max-width:62ch;margin:12px 0 0}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px;margin-top:22px}
+.cols h3{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 8px;border-bottom:1px solid var(--box-stroke);padding-bottom:6px}
+.cols ol{margin:0;padding-left:1.6em;display:flex;flex-direction:column;gap:6px}
+.cols a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--sheet-edge)}
+.cols a:hover{border-color:var(--accent);color:var(--accent)}
+.cols small{display:block;color:var(--muted);font-size:13px}
+.models{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin-top:20px}
+.model{border:1px solid var(--box-stroke);background:var(--box);padding:12px 14px;font-family:"PT Sans Narrow",Arial,sans-serif;font-size:15.5px}
+.model b{display:block;font-family:"PT Sans",Arial,sans-serif;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.note{margin-top:18px;font-size:14px;color:var(--muted);max-width:90ch;border-left:3px solid var(--side-stroke);padding-left:12px}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+
+<nav class="toc" id="toc" aria-label="Схемы"><span>Схемы</span></nav>
+<main id="main">
+  <section class="slide" id="intro">
+    <div class="eyebrow"><span>Учебная инфографика · менеджмент и организационные структуры</span><span>10 схем</span></div>
+    <h1>Организационные структуры управления 10 предприятий</h1>
+    <p class="lede">По одной схеме на организацию: иерархия органов управления сверху вниз, контрольные и коллегиальные органы — сбоку. Реквизиты взяты из карточек предприятий, сама структура построена по организационно-правовой форме.</p>
+    <div class="cols" id="contents"></div>
+    <div class="models">
+      <div class="model"><b>Акционерное общество</b>Акционеры → Общее собрание акционеров → Совет директоров → Правление → Генеральный директор → подразделения</div>
+      <div class="model"><b>Общество с ограниченной ответственностью</b>Участники → Общее собрание участников → Генеральный директор → подразделения</div>
+      <div class="model"><b>Образовательное учреждение</b>Учредитель → Руководитель → Администрация → структурные подразделения → педагогический персонал</div>
+      <div class="model"><b>Медицинское учреждение</b>Учредитель → Главный врач → Заместители → медицинские и административно-хозяйственные подразделения</div>
+    </div>
+    <p class="note">Карточки содержат только реквизиты и не описывают органы управления. Поэтому все органы, кроме собственников, подписаны <em style="color:var(--tag)">«типовая учебная модель»</em>. Это не официальная структура конкретной организации. Имена приведены только так, как они указаны в карточке в поле «Учредители».</p>
+  </section>
+</main>
+
+<script>
+const TYP = 'типовая учебная модель';
+const CARD = 'по данным карточки';
+const SRC = 'Источник: предоставленные данные о предприятии. Организационная схема составлена как учебный пример на основе организационно-правовой формы.';
+
+/* ---------- шаблоны по организационно-правовой форме ---------- */
+const AO_COMMITTEES = [
+  'Комитет по аудиту',
+  'Комитет по корпоративному\nуправлению',
+  'Комитет по кадрам\nи вознаграждениям',
+  'Комитет по стратегическому\nразвитию'
+];
+function ao(ownerSub, units){
+  return {
+    levels:[
+      {cap:'СОБСТВЕННИКИ (ПРИНЦИПАЛЫ)', t:'Акционеры (инвесторы)', s:ownerSub, tag:CARD, kind:'owner'},
+      {cap:'ВЫСШИЙ УРОВЕНЬ УПРАВЛЕНИЯ', t:'Общее собрание акционеров'},
+      {cap:'СТРАТЕГИЧЕСКИЙ УРОВЕНЬ', t:'Совет директоров'},
+      {cap:'ИСПОЛНИТЕЛЬНЫЙ ОРГАН', t:'Правление', s:'коллегиальный исполнительный орган'},
+      {cap:'РУКОВОДИТЕЛЬ', t:'Генеральный директор', s:'единоличный исполнительный орган'}
+    ],
+    leftHdr:'КОНТРОЛЬ / АУДИТ', rightHdr:'КОМИТЕТЫ СОВЕТА ДИРЕКТОРОВ',
+    groups:[
+      {side:'L', at:1, boxes:['Ревизионная комиссия']},
+      {side:'L', at:2, boxes:['Департамент\nвнутреннего аудита','Корпоративный секретарь']},
+      {side:'R', at:2, boxes:AO_COMMITTEES}
+    ],
+    unitsCap:'ОСНОВНЫЕ ФУНКЦИОНАЛЬНЫЕ ПОДРАЗДЕЛЕНИЯ', units
+  };
+}
+function ooo(ownerSub, units, extra){
+  const levels=[
+    {cap:'СОБСТВЕННИКИ', t:'Участники общества', s:ownerSub, tag:CARD, kind:'owner'},
+    {cap:'ВЫСШИЙ ОРГАН УПРАВЛЕНИЯ', t:'Общее собрание участников'},
+    {cap:'ИСПОЛНИТЕЛЬНЫЙ ОРГАН', t:'Генеральный директор', s:'единоличный исполнительный орган'}
+  ];
+  return Object.assign({
+    levels, leftHdr:'КОНТРОЛЬ / АУДИТ',
+    groups:[{side:'L', at:1, boxes:['Ревизионная комиссия\n(ревизор)','Внешний аудитор']}],
+    unitsCap:'ОСНОВНЫЕ ПОДРАЗДЕЛЕНИЯ', units
+  }, extra||{});
+}
+
+/* ---------- 10 организаций (реквизиты — из карточек) ---------- */
+const ORGS = [
+{ short:'ПАО «ЧМК»', name:'ПАО «Челябинский металлургический комбинат»', sector:'Промышленность',
+  full:'ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО «ЧЕЛЯБИНСКИЙ МЕТАЛЛУРГИЧЕСКИЙ КОМБИНАТ»', opf:'Публичное акционерное общество',
+  facts:[['ИНН','7450001007'],['ОГРН','1027402812777'],['ОКВЭД','24.10.6'],['Адрес','454047, г. Челябинск, 2-я Павелецкая ул., д. 14'],['Учредители (по карточке)','Канин Владимир Викторович'],['Регистрация','22.02.1993']],
+  ...ao('учредитель по карточке:\nКанин Владимир Викторович',[
+    'Производственная\nдирекция\n(основные цеха)','Техническая дирекция\nи служба качества','Коммерческая дирекция\n(сбыт и снабжение)','Финансово-\nэкономическая служба','Служба персонала\nи охраны труда'])
+},
+{ short:'АО «ЧТПЗ»', name:'АО «Челябинский трубопрокатный завод»', sector:'Промышленность',
+  full:'АКЦИОНЕРНОЕ ОБЩЕСТВО «ЧЕЛЯБИНСКИЙ ТРУБОПРОКАТНЫЙ ЗАВОД»', opf:'Акционерное общество',
+  facts:[['ИНН','7449006730'],['ОГРН','1027402694186'],['ОКВЭД','24.20'],['Адрес','454129, г. Челябинск, ул. Машиностроителей, д. 21'],['Учредители (по карточке)','ПАО «Трубная Металлургическая Компания»'],['Регистрация','21.10.1992']],
+  ...ao('учредитель по карточке: ПАО «Трубная\nМеталлургическая Компания»',[
+    'Трубопрокатные\nцеха','Трубоэлектро-\nсварочные цеха','Техническая служба\nи ОТК','Коммерческая\nслужба','Финансово-\nэкономическая служба'])
+},
+{ short:'ООО «ЧСЗ»', name:'ООО «Челябинский станкостроительный завод»', sector:'Промышленность',
+  full:'ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ «ЧЕЛЯБИНСКИЙ СТАНКОСТРОИТЕЛЬНЫЙ ЗАВОД»', opf:'Общество с ограниченной ответственностью',
+  facts:[['ИНН','7460049223'],['ОГРН','1207400025381'],['ОКВЭД','46.62'],['Адрес','454038, г. Челябинск, Хлебозаводская ул., д. 7, помещ. 305'],['Учредители (по карточке)','Звонарев Сергей Вячеславович'],['Регистрация','15.07.2020']],
+  ...ooo('учредитель по карточке:\nЗвонарев Сергей Вячеславович',[
+    'Отдел продаж станков\nи оборудования','Отдел закупок\nи логистики','Сервисно-\nтехнический отдел','Склад','Бухгалтерия\nи финансы'],
+    {unitsCap:'ОСНОВНЫЕ ПОДРАЗДЕЛЕНИЯ (ПО ОКВЭД 46.62)'})
+},
+{ short:'ПАО «ЖБИ №1»', name:'ПАО «Челябинский завод ЖБИ №1»', sector:'Промышленность',
+  full:'ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО «ЧЕЛЯБИНСКИЙ ЗАВОД ЖБИ №1»', opf:'Публичное акционерное общество',
+  facts:[['ИНН','7447004664'],['ОГРН','1027402319592'],['ОКВЭД','41.2'],['Адрес','628181, ХМАО — Югра, г. Нягань, мкр. 4, д. 28, помещ. 233'],['Учредители (по карточке)','Никитин Александр Александрович'],['Регистрация','25.06.1996']],
+  ...ao('учредитель по карточке:\nНикитин Александр Александрович',[
+    'Формовочные цеха\n(производство ЖБИ)','Строительное\nуправление','ОТК и строительная\nлаборатория','Коммерческая\nслужба','Финансово-\nэкономическая служба'])
+},
+{ short:'ООО «ЧЗЭМ»', name:'ООО «Челябинский завод энергетического машиностроения»', sector:'Промышленность',
+  full:'ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ «ЧЕЛЯБИНСКИЙ ЗАВОД ЭНЕРГЕТИЧЕСКОГО МАШИНОСТРОЕНИЯ»', opf:'Общество с ограниченной ответственностью',
+  facts:[['ИНН','7451268010'],['ОГРН','1087451007852'],['ОКВЭД','68.20.29'],['Адрес','454085, г. Челябинск, Плотничный пер., д. 14'],['Учредители (по карточке)','Акимов Максим Николаевич'],['Регистрация','20.06.2008'],['Налоговый режим','АУСН']],
+  ...ooo('учредитель по карточке:\nАкимов Максим Николаевич',[
+    'Отдел управления\nимуществом','Отдел аренды\n(работа с арендаторами)','Эксплуатационно-\nтехническая служба','Юридическая\nслужба','Бухгалтерия'],
+    {unitsCap:'ОСНОВНЫЕ ПОДРАЗДЕЛЕНИЯ (ПО ОКВЭД 68.20.29)'})
+},
+{ short:'ГБПОУ «ЮУМК»', name:'ГБПОУ «Южно-Уральский многопрофильный колледж»', sector:'Образование',
+  full:'ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ ПРОФЕССИОНАЛЬНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ «ЮЖНО-УРАЛЬСКИЙ МНОГОПРОФИЛЬНЫЙ КОЛЛЕДЖ»', opf:'Государственное бюджетное профессиональное образовательное учреждение',
+  facts:[['ИНН','7460004896'],['ОГРН','1127460006740'],['ОКВЭД','85.21'],['Адрес','454031, г. Челябинск, ул. 50-летия ВЛКСМ, д. 1'],['Учредители (по карточке)','Большаков Александр Павлович'],['Регистрация','01.11.2012']],
+  levels:[
+    {cap:'УЧРЕДИТЕЛЬ', t:'Учредитель', s:'орган исполнительной власти субъекта РФ\n(для государственного учреждения)', kind:'owner'},
+    {cap:'РУКОВОДИТЕЛЬ', t:'Директор колледжа'},
+    {cap:'АДМИНИСТРАЦИЯ', t:'Заместители директора', s:'по учебной, учебно-производственной,\nвоспитательной и административно-хозяйственной работе'}
+  ],
+  leftHdr:'КОНТРОЛЬ / НАБЛЮДЕНИЕ', rightHdr:'КОЛЛЕГИАЛЬНЫЕ ОРГАНЫ',
+  groups:[
+    {side:'L', at:0, boxes:['Контроль учредителя\n(гос. задание, финансы)']},
+    {side:'R', at:1, boxes:['Общее собрание работников\nи обучающихся','Педагогический совет','Совет колледжа']}
+  ],
+  unitsCap:'ОСНОВНЫЕ СТРУКТУРНЫЕ ПОДРАЗДЕЛЕНИЯ',
+  units:['Учебная часть','Отделения\nпо специальностям','Учебно-производ-\nственные мастерские','Методическая\nслужба','Бухгалтерия\nи отдел кадров'],
+  staff:{cap:'ПЕДАГОГИЧЕСКИЙ ПЕРСОНАЛ', t:'Преподаватели, мастера производственного обучения, кураторы групп'}
+},
+{ short:'ЮУрГУ', name:'ФГАОУ ВО «Южно-Уральский государственный университет»', sector:'Образование',
+  full:'ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ АВТОНОМНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ «ЮЖНО-УРАЛЬСКИЙ ГОСУДАРСТВЕННЫЙ УНИВЕРСИТЕТ (НАЦИОНАЛЬНЫЙ ИССЛЕДОВАТЕЛЬСКИЙ УНИВЕРСИТЕТ)»', opf:'Федеральное государственное автономное образовательное учреждение высшего образования',
+  facts:[['ИНН','7453019764'],['ОГРН','1027403857568'],['ОКВЭД','85.22.1'],['Адрес','454080, г. Челябинск, пр-кт Ленина, д. 76'],['Учредители (по карточке)','Вагнер Александр Рудольфович'],['Регистрация','13.07.1994']],
+  levels:[
+    {cap:'УЧРЕДИТЕЛЬ', t:'Учредитель', s:'федеральный орган исполнительной власти\n(для федерального учреждения)', kind:'owner'},
+    {cap:'РУКОВОДИТЕЛЬ', t:'Ректор'},
+    {cap:'АДМИНИСТРАЦИЯ', t:'Проректоры', s:'по учебной, научной, международной работе,\nэкономике и административно-хозяйственной работе'}
+  ],
+  leftHdr:'НАБЛЮДЕНИЕ / КОНТРОЛЬ', rightHdr:'КОЛЛЕГИАЛЬНЫЕ ОРГАНЫ',
+  groups:[
+    {side:'L', at:0, boxes:['Наблюдательный совет\n(орган автономного учреждения)']},
+    {side:'L', at:1, boxes:['Контрольно-ревизионное\nуправление']},
+    {side:'R', at:1, boxes:['Конференция работников\nи обучающихся','Учёный совет\nуниверситета']}
+  ],
+  unitsCap:'ОСНОВНЫЕ СТРУКТУРНЫЕ ПОДРАЗДЕЛЕНИЯ',
+  units:['Институты\nи высшие школы','Кафедры','Научно-исследова-\nтельские подразделения','Учебное\nуправление','Административно-\nхозяйственные службы'],
+  staff:{cap:'УЧЕБНЫЙ И НАУЧНЫЙ ПЕРСОНАЛ', t:'Профессорско-преподавательский состав и научные работники'}
+},
+{ short:'МБУ ДО «ЦДТ»', name:'МБУ ДО «Центр детского творчества г. Челябинска»', sector:'Образование',
+  full:'МУНИЦИПАЛЬНОЕ БЮДЖЕТНОЕ УЧРЕЖДЕНИЕ ДОПОЛНИТЕЛЬНОГО ОБРАЗОВАНИЯ «ЦЕНТР ДЕТСКОГО ТВОРЧЕСТВА Г. ЧЕЛЯБИНСКА»', opf:'Муниципальное бюджетное учреждение дополнительного образования',
+  facts:[['ИНН','7448019007'],['ОГРН','1027402552980'],['ОКВЭД','85.41.9'],['Адрес','454112, г. Челябинск, пр-кт Победы, д. 318а'],['Учредители (по карточке)','Семенова Наталья Михайловна'],['Регистрация','17.07.1995']],
+  levels:[
+    {cap:'УЧРЕДИТЕЛЬ', t:'Учредитель', s:'орган местного самоуправления\n(для муниципального учреждения)', kind:'owner'},
+    {cap:'РУКОВОДИТЕЛЬ', t:'Директор'},
+    {cap:'АДМИНИСТРАЦИЯ', t:'Заместители директора', s:'по учебно-воспитательной, методической\nи административно-хозяйственной работе'}
+  ],
+  leftHdr:'КОНТРОЛЬ / НАБЛЮДЕНИЕ', rightHdr:'КОЛЛЕГИАЛЬНЫЕ ОРГАНЫ',
+  groups:[
+    {side:'L', at:0, boxes:['Контроль учредителя\n(муниципальное задание)']},
+    {side:'R', at:1, boxes:['Педагогический совет','Методический совет','Общее собрание\nработников']}
+  ],
+  unitsCap:'ОСНОВНЫЕ СТРУКТУРНЫЕ ПОДРАЗДЕЛЕНИЯ',
+  units:['Отделы по\nнаправленностям\n(худож., технич. и др.)','Методический\nотдел','Отдел массовых\nмероприятий','Административно-\nхозяйственная часть'],
+  staff:{cap:'ПЕДАГОГИЧЕСКИЙ ПЕРСОНАЛ', t:'Педагоги дополнительного образования, педагоги-организаторы, методисты'}
+},
+{ short:'ГБ №5 Севастополь', name:'ГБУЗ Севастополя «Городская больница №5 — Центр охраны здоровья матери и ребенка»', sector:'Здравоохранение',
+  full:'ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ УЧРЕЖДЕНИЕ ЗДРАВООХРАНЕНИЯ СЕВАСТОПОЛЯ «ГОРОДСКАЯ БОЛЬНИЦА № 5 — ЦЕНТР ОХРАНЫ ЗДОРОВЬЯ МАТЕРИ И РЕБЕНКА»', opf:'Государственное бюджетное учреждение',
+  facts:[['ИНН','9204021260'],['ОГРН','1149204045044'],['ОКВЭД','86.10'],['Адрес','299055, г. Севастополь, пр-кт Генерала Острякова, д. 211-а'],['Учредители (по карточке)','Шайнер Наталья Борисовна'],['Регистрация','18.01.1983']],
+  levels:[
+    {cap:'УЧРЕДИТЕЛЬ', t:'Учредитель / орган управления', s:'орган исполнительной власти г. Севастополя\nв сфере здравоохранения', kind:'owner'},
+    {cap:'РУКОВОДИТЕЛЬ', t:'Главный врач'},
+    {cap:'ЗАМЕСТИТЕЛИ', t:'Заместители главного врача', s:'по медицинской части, акушерству и гинекологии,\nпедиатрии, экономике, хозяйственной работе'}
+  ],
+  leftHdr:'КОНТРОЛЬ КАЧЕСТВА', rightHdr:'КОЛЛЕГИАЛЬНЫЕ ОРГАНЫ',
+  groups:[
+    {side:'L', at:0, boxes:['Контроль учредителя\n(гос. задание)']},
+    {side:'L', at:1, boxes:['Врачебная комиссия','Служба внутреннего\nконтроля качества']},
+    {side:'R', at:1, boxes:['Медицинский совет']}
+  ],
+  unitsCap:'МЕДИЦИНСКИЕ И АДМИНИСТРАТИВНО-ХОЗЯЙСТВЕННЫЕ ПОДРАЗДЕЛЕНИЯ',
+  units:['Женская\nконсультация','Родильное\nотделение','Гинекологическое\nотделение','Детские\n(педиатрические)\nотделения','Параклиника\n(лаборатория, УЗИ)',{t:'Административно-\nхозяйственные\nподразделения',kind:'unit2'}]
+},
+{ short:'«Ваш Доктор»', name:'ООО Клиника семейной медицины «Ваш Доктор»', sector:'Здравоохранение',
+  full:'ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ КЛИНИКА СЕМЕЙНОЙ МЕДИЦИНЫ «ВАШ ДОКТОР»', opf:'Общество с ограниченной ответственностью',
+  facts:[['ИНН','6659214076'],['ОГРН','1116659000347'],['ОКВЭД','86'],['Адрес','620050, г. Екатеринбург, Техническая ул., д. 94, офис 7'],['Учредители (по карточке)','Головенько Оксана Игоревна'],['Регистрация','20.01.2011']],
+  ...ooo('учредитель по карточке:\nГоловенько Оксана Игоревна',[
+    'Отделение семейной\nмедицины (ВОП)','Педиатрия','Узкие\nспециалисты','Диагностика\n(лаборатория, УЗИ)',{t:'Административно-\nхозяйственная служба\n(регистратура, бух.)',kind:'unit2'}],
+    {unitsCap:'МЕДИЦИНСКИЕ И АДМИНИСТРАТИВНО-ХОЗЯЙСТВЕННЫЕ ПОДРАЗДЕЛЕНИЯ'})
+}
+];
+// Клиника: добавить медицинское руководство и контроль качества к модели ООО
+(function(){
+  const o = ORGS[9];
+  o.levels = o.levels.concat([
+    {cap:'МЕДИЦИНСКОЕ РУКОВОДСТВО', t:'Главный врач'},
+    {cap:'ЗАМЕСТИТЕЛИ', t:'Заместитель главного врача', s:'по медицинской части'}
+  ]);
+  o.leftHdr = 'КОНТРОЛЬ / КАЧЕСТВО';
+  o.groups = [
+    {side:'L', at:1, boxes:['Ревизор']},
+    {side:'L', at:3, boxes:['Врачебная комиссия','Внутренний контроль\nкачества мед. помощи']}
+  ];
+})();
+
+/* ---------- рендер схемы ---------- */
+const NS='http://www.w3.org/2000/svg';
+const W=1200, CX=410, CW=380, LX=30, SW=280, RX=890, LBUS=358, RBUS=842;
+const SIZES={ main:{fs:19,ss:14.5}, owner:{fs:19,ss:14.5}, side:{fs:16.5,ss:13}, unit:{fs:15.5,ss:13}, unit2:{fs:15.5,ss:13}, staff:{fs:17,ss:13} };
+const TAGFS=12;
+
+function el(tag, attrs, parent, text){
+  const e=document.createElementNS(NS,tag);
+  for(const k in attrs) e.setAttribute(k,attrs[k]);
+  if(text!=null) e.textContent=text;
+  if(parent) parent.appendChild(e);
+  return e;
+}
+function norm(b, kind){
+  if(typeof b==='string') b={t:b};
+  return Object.assign({kind, tag:TYP}, b, {kind:b.kind||kind, tag:b.tag||TYP});
+}
+function hOf(b){
+  const z=SIZES[b.kind]; const tl=b.t.split('\n').length; const sl=b.s?b.s.split('\n').length:0;
+  return 22 + tl*(z.fs+4) + (sl? 4+sl*(z.ss+4):0) + (b.tag? 5+TAGFS+2:0);
+}
+function drawBox(g,b,x,y,w,h){
+  const z=SIZES[b.kind];
+  el('rect',{x,y,width:w,height:h,class:'b-'+(b.kind==='staff'?'unit':b.kind)},g);
+  const content=h-22; const cx=x+w/2;
+  const tl=b.t.split('\n'), sl=b.s?b.s.split('\n'):[];
+  const used = tl.length*(z.fs+4) + (sl.length?4+sl.length*(z.ss+4):0) + (b.tag?5+TAGFS+2:0);
+  let cy=y+11+(content-used)/2;
+  tl.forEach(l=>{ cy+=z.fs+4; el('text',{x:cx,y:cy-5,'text-anchor':'middle','font-size':z.fs,class:'t'},g,l); });
+  if(sl.length){ cy+=4; sl.forEach(l=>{ cy+=z.ss+4; el('text',{x:cx,y:cy-4,'text-anchor':'middle','font-size':z.ss,class:'s'},g,l); }); }
+  if(b.tag){ cy+=5+TAGFS+2; el('text',{x:cx,y:cy-4,'text-anchor':'middle','font-size':TAGFS,class:'tag'},g,'— '+b.tag+' —'); }
+}
+function line(g,pts,arrow,id){
+  const a={class:'conn',points:pts.map(p=>p.join(',')).join(' ')};
+  if(arrow) a['marker-end']='url(#'+id+')';
+  el('polyline',a,g);
+}
+function render(org, idx){
+  const svg=el('svg',{viewBox:'0 0 '+W+' 100',role:'img','aria-label':'Схема управления: '+org.name});
+  const mid='ah'+idx;
+  const defs=el('defs',{},svg);
+  const m=el('marker',{id:mid,viewBox:'0 0 10 10',refX:9,refY:5,markerWidth:8,markerHeight:8,orient:'auto-start-reverse'},defs);
+  el('path',{d:'M0,1 L10,5 L0,9 z',class:'arrowhead'},m);
+  const gl=el('g',{},svg), gb=el('g',{},svg);
+
+  // центральная вертикаль
+  const lv=org.levels.map(b=>norm(b, b.kind||'main'));
+  let y=66;
+  lv.forEach((b,i)=>{
+    b.h=hOf(b); b.y=y;
+    el('text',{x:CX+CW/2+12,y:y-11,class:'cap'},gb,b.cap);
+    if(i>0) line(gl,[[CX+CW/2,lv[i-1].y+lv[i-1].h],[CX+CW/2,y-1]],true,mid);
+    drawBox(gb,b,CX,y,CW,b.h);
+    y+=b.h+54;
+  });
+  const centerBottom=lv[lv.length-1].y+lv[lv.length-1].h;
+
+  // боковые органы
+  if(org.leftHdr) el('text',{x:LX,y:32,class:'hdr'},gb,org.leftHdr);
+  if(org.rightHdr) el('text',{x:RX,y:32,class:'hdr'},gb,org.rightHdr);
+  const cur={L:48,R:48};
+  (org.groups||[]).forEach(gr=>{
+    const L=gr.side==='L'; const bx=L?LX:RX; const bus=L?LBUS:RBUS;
+    const at=lv[gr.at]; const ay=at.y+at.h/2;
+    let gy=Math.max(at.y,cur[gr.side]);
+    const centers=[];
+    gr.boxes.forEach(bb=>{
+      const b=norm(bb,'side'); b.h=hOf(b);
+      drawBox(gb,b,bx,gy,SW,b.h);
+      centers.push(gy+b.h/2);
+      line(gl,[[bus,gy+b.h/2],[L?bx+SW:bx,gy+b.h/2]],false);
+      gy+=b.h+14;
+    });
+    line(gl,[[L?CX:CX+CW,ay],[bus,ay]],false);
+    line(gl,[[bus,Math.min(ay,centers[0])],[bus,Math.max(ay,centers[centers.length-1])]],false);
+    cur[gr.side]=gy-14+28;
+  });
+
+  // подразделения
+  const us=org.units.map(u=>norm(u,'unit'));
+  const n=us.length, gap=16, uw=(W-2*LX-gap*(n-1))/n;
+  const uh=Math.max(...us.map(hOf));
+  const uTop=Math.max(centerBottom+30, cur.L, cur.R)+62;
+  const busY=uTop-28;
+  el('text',{x:LX,y:busY-12,class:'cap'},gb,org.unitsCap);
+  line(gl,[[CX+CW/2,centerBottom],[CX+CW/2,busY]],false);
+  const ux=i=>LX+i*(uw+gap);
+  line(gl,[[ux(0)+uw/2,busY],[ux(n-1)+uw/2,busY]],false);
+  us.forEach((b,i)=>{
+    line(gl,[[ux(i)+uw/2,busY],[ux(i)+uw/2,uTop-1]],true,mid);
+    drawBox(gb,b,ux(i),uTop,uw,uh);
+  });
+  let bottom=uTop+uh;
+
+  if(org.staff){
+    const s=norm({t:org.staff.t},'staff'); s.h=hOf(s);
+    const b2=bottom+26, sTop=b2+46, sx=250, sw=700;
+    us.forEach((b,i)=>line(gl,[[ux(i)+uw/2,bottom],[ux(i)+uw/2,b2]],false));
+    line(gl,[[ux(0)+uw/2,b2],[ux(n-1)+uw/2,b2]],false);
+    line(gl,[[W/2,b2],[W/2,sTop-1]],true,mid);
+    el('text',{x:W/2+12,y:sTop-12,class:'cap'},gb,org.staff.cap);
+    drawBox(gb,s,sx,sTop,sw,s.h);
+    bottom=sTop+s.h;
+  }
+  svg.setAttribute('viewBox','0 0 '+W+' '+(bottom+16));
+  return svg;
+}
+
+/* ---------- сборка слайдов ---------- */
+const main=document.getElementById('main'), toc=document.getElementById('toc');
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const sectors={};
+ORGS.forEach((o,i)=>{
+  const id='s'+(i+1);
+  (sectors[o.sector]=sectors[o.sector]||[]).push([i,o]);
+  const a=document.createElement('a'); a.href='#'+id; a.textContent=(i+1)+'. '+o.short; toc.appendChild(a);
+
+  const sec=document.createElement('section'); sec.className='slide'; sec.id=id;
+  sec.innerHTML=
+    '<div class="eyebrow"><span>Схема '+(i+1)+' из 10 · '+o.sector+'</span><span>Учебный пример</span></div>'+
+    '<h2>Организационная структура управления</h2>'+
+    '<hr class="rule">'+
+    '<p class="org">'+esc(o.name)+'</p>'+
+    '<p class="opf">'+esc(o.opf)+' · '+esc(o.full)+'</p>'+
+    '<hr class="rule">'+
+    '<ul class="facts">'+o.facts.map(f=>'<li>'+f[0]+': <b>'+esc(f[1])+'</b></li>').join('')+'</ul>'+
+    '<div class="diagram"></div>'+
+    '<div class="foot"><div class="legend">'+
+      '<span><i class="l-owner"></i>собственники / учредитель</span>'+
+      '<span><i class="l-main"></i>органы управления</span>'+
+      '<span><i class="l-side"></i>контроль, аудит, коллегиальные органы</span>'+
+      '<span><i class="l-unit"></i>подразделения</span>'+
+    '</div><p class="source">'+SRC+' Блоки с пометкой <em>«'+TYP+'»</em> не подтверждены исходным документом.</p></div>';
+  sec.querySelector('.diagram').appendChild(render(o,i));
+  main.appendChild(sec);
+});
+const cont=document.getElementById('contents');
+Object.keys(sectors).forEach(k=>{
+  const d=document.createElement('div');
+  d.innerHTML='<h3>'+k+'</h3><ol start="'+(sectors[k][0][0]+1)+'">'+sectors[k].map(([i,o])=>
+    '<li><a href="#s'+(i+1)+'">'+esc(o.name)+'</a><small>'+esc(o.opf)+'</small></li>').join('')+'</ol>';
+  cont.appendChild(d);
+});
+</script>
+
+</body></html>
