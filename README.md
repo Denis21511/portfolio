@@ -40,6 +40,7 @@ npx http-server . -p 5200 -c-1
 ## Откуда материалы
 
 Скриншоты сняты с реальных файлов проектов в соседних папках (`dobrovet`, `goldskin`, `starker`, `dal`,
-`autoparts-widgets`, `tilda-widgets`, `2gis-leads`, «Оргструктуры десяти предприятий.html»), мобильные коллажи
+`autoparts-widgets`, `tilda-widgets`, `2gis-leads`, «Оргструктуры десяти предприятий.html»), «Мотив» и «Досье» —
+с их опубликованных версий (denis21511.github.io/motiv и /dosie, исходники в `Desktop/MOTIV` и `Desktop/dosie`), мобильные коллажи
 и виджеты Tilda — исходные PNG из папок `screenshots`. Диалог бота собран из текстов `order_bot/texts.py`,
 `keyboards.py` и `handlers/`. Таблица компаний из исследования 2ГИС в портфолио не выводится, только сводные цифры по нишам.
